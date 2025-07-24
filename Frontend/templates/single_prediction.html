@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Single Prediction{% endblock %}
+
+{% block content %}
+<style>
+    .form-container {
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        width: 100%;
+        margin: auto;
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    textarea {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        resize: none;
+        margin-bottom: 10px;
+    }
+
+    input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+    .prediction-box {
+        margin-top: 20px;
+        background-color: #f0f8ff;
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+    }
+
+    .highlight {
+        font-weight: bold;
+        color: #2c3e50;
+    }
+</style>
+
+<div class="form-container">
+    <h1>Customer Churn Prediction using BERT on Google Play Store Reviews</h1>
+
+    <form method="post" action="{{ url_for('single_prediction') }}">
+        <label for="text"><strong>Your Review:</strong></label><br>
+        <textarea name="text" id="text" rows="5" placeholder="Type your review here..." required>{{ review or '' }}</textarea><br>
+        <input type="submit" value="Predict Sentiment">
+    </form>
+
+    {% if prediction %}
+    <div class="prediction-box">
+        <p><span class="highlight">Your Review:</span> {{ review }}</p>
+        <p><span class="highlight">Prediction:</span> {{ prediction }}</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+

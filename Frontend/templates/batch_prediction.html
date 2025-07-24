@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}Batch Prediction {% endblock %}
+
+{% block content %}
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f7f9fb;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+
+    h2 {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 30px;
+    }
+
+    form {
+        background-color: #ffffff;
+        padding: 30px;
+        max-width: 500px;
+        margin: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+        font-size: 16px;
+        display: block;
+        margin-bottom: 15px;
+    }
+
+    input[type="file"] {
+        padding: 10px;
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+    input[type="submit"] {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #2980b9;
+    }
+
+    h3 {
+        text-align: center;
+        color: #27ae60;
+        margin-top: 40px;
+    }
+
+    .prediction-results {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f0f0f0;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+</style>
+
+<h2>Batch Sentiment Prediction of Customer Churn Prediction using BERT on Google Play Store Reviews</h2>
+<form method="POST" enctype="multipart/form-data">
+    <label><strong>Upload CSV with 'review' column:</strong></label>
+    <input type="file" name="file" accept=".csv" required>
+    <input type="submit" value="Predict">
+</form>
+
+{% if predictions %}
+    <h3>Prediction Results:</h3>
+    <div class="prediction-results">
+        {{ predictions|safe }}
+    </div>
+{% endif %}
+{% endblock %}
+
